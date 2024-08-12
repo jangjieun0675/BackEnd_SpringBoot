@@ -8,17 +8,17 @@ import com.restapi.emp.exception.ResourceNotFoundException;
 import com.restapi.emp.repository.DepartmentRepository;
 import com.restapi.emp.repository.EmployeeRepository;
 import com.restapi.emp.service.EmployeeService;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
+@RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
@@ -54,8 +54,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees.stream()
                 .map(EmployeeMapper::mapToEmployeeDto)
                 .toList();
-                //.map((employee) -> EmployeeMapper.mapToEmployeeDto(employee))
-                //.collect(Collectors.toList());
+        //.map((employee) -> EmployeeMapper.mapToEmployeeDto(employee))
+        //.collect(Collectors.toList());
     }
 
     public List<EmployeeDto> getAllEmployeesDepartment() {
@@ -72,7 +72,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                         new ResourceNotFoundException(
                                 "Employee is not exists with given id: " + employeeId,
                                 HttpStatus.NOT_FOUND)
-        );
+                );
 
         employee.setFirstName(updatedEmployee.getFirstName());
         employee.setLastName(updatedEmployee.getLastName());
@@ -83,7 +83,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                         new ResourceNotFoundException(
                                 "Department is not exists with id: " + updatedEmployee.getDepartmentId(),
                                 HttpStatus.NOT_FOUND
-                                ));
+                        ));
 
         employee.setDepartment(department);
 
@@ -99,7 +99,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Employee is not exists with given id: " + employeeId,
                         HttpStatus.NOT_FOUND)
-        );
+                );
 
         employeeRepository.deleteById(employeeId);
     }
