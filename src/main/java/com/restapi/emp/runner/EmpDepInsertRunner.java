@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@Profile("prod")
+@Profile("local")
 @RequiredArgsConstructor
 public class EmpDepInsertRunner implements ApplicationRunner {
     final DepartmentRepository departmentRepository;
